@@ -1,11 +1,22 @@
 mod balances;
 mod system;
 
-fn main() {
-    println!("Hello, world!");
+pub struct Runtime {
+    system: system::Pallet,
+    balances: balances::Pallet,
+}
+impl Runtime {
+    fn new() -> Self {
+        Self {
+            system: system::Pallet::new(),
+            balances: balances::Pallet::new(),
+        }
+    }
+}
 
-    let mut balance = balances::Pallet::new();
-    let mut system = system::Pallet::new();
+fn main() {
+    let runtime = Runtime::new();
+    println!("Hello, world!");
 }
 
 #[test]
